@@ -16,8 +16,12 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    private  UserDao userdao;
+
     @Autowired
-    UserDao userdao;
+    public UserController(UserDao userdao) {
+        this.userdao = userdao;
+    }
 
     @PostMapping(path = "/save",produces = "application/json",consumes = "application/json")
     public User register(@RequestBody User user){
@@ -29,4 +33,6 @@ public class UserController {
         System.out.println("load user list");
         return userdao.findAll();
     }
+
+    //查看收藏的视频和发布的视频
 }

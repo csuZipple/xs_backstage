@@ -92,13 +92,12 @@ public class VideoController {
         return temp;
     }
 
-    @RequestMapping(value = "/file/{filename:.+}")
+    @RequestMapping(value = "/file/{filename}")
     @ResponseBody
     public ResponseEntity<?> preview(@PathVariable String filename) {
-        //如果需要在页面中回显，需要使用在页面中使用响应的标签来显示这里的流
         try {
             return ResponseEntity.ok(resourceLoader.getResource(
-                    "file:" + Paths.get("./video/", filename).toString()));
+                    "file:" + Paths.get("./video/", filename).toString()));//为什么在浏览器上输出的是二进制
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
