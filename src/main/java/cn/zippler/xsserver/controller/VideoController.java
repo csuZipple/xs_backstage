@@ -38,7 +38,8 @@ public class VideoController {
     @PostMapping("/upload")
     public Map<String,Object> upload(@RequestParam("file")MultipartFile file, @RequestParam Long userId,@RequestParam String desc){
         Map<String,Object> result = new HashMap<>();
-        String path = FileUtil.getVideoPath()+"/"+file.getOriginalFilename();
+        String filename = file.getOriginalFilename();
+        String path = FileUtil.getVideoPath()+"/"+filename;
         if (!file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")).equals("mp4")){
             if (!file.isEmpty()) {
                 try {
@@ -49,7 +50,7 @@ public class VideoController {
                     //更新user和video
                     Video video = new Video();
                     video.setDeployer(userDao.getOne(userId));//userId must not be null.
-                    video.setUrl(path);
+                    video.setUrl(filename);
                     //set poster.maybe not
                     video.setDescription(desc);
                     videoDao.save(video);
@@ -96,12 +97,13 @@ public class VideoController {
     @ResponseBody
     public ResponseEntity<?> preview(@PathVariable String filename) {
         try {
-            return ResponseEntity.ok(resourceLoader.getResource(
-                    "file:" + Paths.get("./video/", filename).toString()));//为什么在浏览器上输出的是二进制
+            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get("./video/", filename).toString()));//为什么在浏览器上输出的是二进制?
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
+
+    //get url.
 
     @RequestMapping(value = "/download/{filename}")
     @ResponseBody
