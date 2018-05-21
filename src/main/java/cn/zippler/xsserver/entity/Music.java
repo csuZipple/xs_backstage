@@ -56,4 +56,7 @@ public class Music {
     public void setTime(Timestamp time) {
         this.time = time;
     }
+
+    public Music() {
+    }
 }

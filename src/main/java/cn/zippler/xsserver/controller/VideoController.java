@@ -2,6 +2,7 @@ package cn.zippler.xsserver.controller;
 
 import cn.zippler.xsserver.dao.UserDao;
 import cn.zippler.xsserver.dao.VideoDao;
+import cn.zippler.xsserver.entity.User;
 import cn.zippler.xsserver.entity.Video;
 import cn.zippler.xsserver.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,6 +136,11 @@ public class VideoController {
                 }
             }
         }
+    }
+
+    @RequestMapping("/deployer")
+    public List<Video> findVideoByDeployer(@RequestParam("userId")Long userId){
+        return videoDao.findVideosByDeployer(userDao.getOne(userId));
     }
 
 }

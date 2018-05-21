@@ -57,4 +57,7 @@ public class Comment {
     public void setTime(Timestamp time) {
         this.time = time;
     }
+
+    public Comment() {
+    }
 }

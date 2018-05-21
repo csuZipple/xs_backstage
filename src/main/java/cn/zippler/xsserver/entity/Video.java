@@ -72,7 +72,6 @@ public class Video {
         return deployer;
     }
 
-    @JsonBackReference
     public void setDeployer(User deployer) {
         this.deployer = deployer;
     }
@@ -80,7 +79,7 @@ public class Video {
     public Set<User> getFavUsers() {
         return favUsers;
     }
-    @JsonBackReference
+
     public void setFavUsers(Set<User> favUsers) {
         this.favUsers = favUsers;
     }
@@ -99,5 +98,8 @@ public class Video {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Video() {
     }
 }

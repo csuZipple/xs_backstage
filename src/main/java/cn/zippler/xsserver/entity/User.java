@@ -1,5 +1,7 @@
 package cn.zippler.xsserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -68,6 +70,7 @@ public class User {
         return deploys;
     }
 
+    @JsonBackReference
     public void setDeploys(Set<Video> deploys) {
         this.deploys = deploys;
     }
@@ -127,5 +130,8 @@ public class User {
 
     public void setFansId(Set<Integer> fansId) {
         this.fansId = fansId;
+    }
+
+    public User() {
     }
 }
